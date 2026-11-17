@@ -1,0 +1,320 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #171722;
+}
+#margus-cv {
+  --bg:#171722; --fg:#ececf2; --muted:#a7a7b5; --card:#20202d; --border:#3a3650;
+  --cyan:#68e5ef; --magenta:#e44ca5; --purple:#7254c7;
+  font-family:"Space Grotesk",Arial,sans-serif; background:var(--bg); color:var(--fg);
+  width:100%; box-sizing:border-box; padding:56px 24px; line-height:1.5; overflow:hidden; position:relative;
+}
+#margus-cv *, #margus-cv *::before, #margus-cv *::after { box-sizing:border-box; }
+#margus-cv a { color:inherit; text-decoration:none; }
+#margus-cv .cv-wrap { max-width:1152px; margin:0 auto; position:relative; z-index:1; }
+#margus-cv .cv-grid-bg {
+  position:absolute; inset:0 0 auto 0; height:480px; pointer-events:none; opacity:.3;
+  background-image:linear-gradient(rgba(76,67,105,.28) 1px,transparent 1px),linear-gradient(90deg,rgba(76,67,105,.28) 1px,transparent 1px);
+  background-size:48px 48px; -webkit-mask-image:linear-gradient(#000,transparent); mask-image:linear-gradient(#000,transparent);
+}
+#margus-cv .hero { display:grid; grid-template-columns:1.6fr 1fr; gap:32px; border-bottom:1px solid var(--border); padding-bottom:40px; }
+#margus-cv .eyebrow,#margus-cv .section-title,#margus-cv .mono { font-family:"JetBrains Mono",monospace; }
+#margus-cv .eyebrow {
+  display:flex; align-items:center; gap:8px; margin-bottom:16px; color:var(--muted);
+  font-size:11px; letter-spacing:.25em; text-transform:uppercase;
+}
+#margus-cv .eyebrow::before { content:""; width:32px; height:1px; background:var(--magenta); }
+#margus-cv h1 { margin:0; font-size:60px; line-height:1; letter-spacing:-.025em; font-weight:700; }
+#margus-cv .role { margin:12px 0 0; font-size:20px; color:var(--cyan); font-weight:500; }
+#margus-cv .subrole { margin:4px 0 0; color:var(--muted); font:14px "JetBrains Mono",monospace; }
+#margus-cv .founder { margin:8px 0 0; color:var(--muted); font-size:14px; }
+#margus-cv .dot { color:var(--magenta); }
+#margus-cv .intro { margin:24px 0 0; max-width:680px; font-size:16px; color:#d4d4dd; }
+#margus-cv .intro + .intro { margin-top:12px; color:var(--muted); }
+#margus-cv .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+#margus-cv .btn {
+  display:inline-flex; align-items:center; gap:8px; padding:9px 16px; border:1px solid var(--border);
+  font:12px "JetBrains Mono",monospace; text-transform:uppercase; letter-spacing:.08em; transition:.18s ease;
+}
+#margus-cv .btn svg { width:16px; height:16px; }
+#margus-cv .btn.primary { background:var(--cyan); border-color:var(--cyan); color:#171722; }
+#margus-cv .btn.primary:hover { box-shadow:0 0 18px -6px var(--cyan); transform:translateY(-1px); }
+#margus-cv .btn.secondary:hover { color:var(--magenta); border-color:var(--magenta); }
+
+#margus-cv .contact-card { background:rgba(32,32,45,.76); border:1px solid var(--border); padding:20px; position:relative; align-self:start; }
+#margus-cv .contact-card::before { content:""; position:absolute; left:0; top:0; bottom:0; width:2px; background:var(--cyan); }
+#margus-cv .contact-row { display:flex; gap:12px; align-items:center; font-size:14px; color:#d8d8e0; margin-bottom:12px; overflow-wrap:anywhere; }
+#margus-cv .contact-row svg { width:16px; height:16px; color:var(--muted); flex:none; }
+#margus-cv a.contact-row { transition:.15s ease; }
+#margus-cv a.contact-row:hover { color:var(--cyan); }
+#margus-cv .availability { border-top:1px solid var(--border); margin-top:20px; padding-top:16px; }
+#margus-cv .mini-label { color:var(--magenta); font:10px "JetBrains Mono",monospace; letter-spacing:.2em; text-transform:uppercase; margin-bottom:8px; }
+#margus-cv .tags { display:flex; flex-wrap:wrap; gap:6px; }
+#margus-cv .tag { display:inline-block; border:1px solid var(--border); padding:2px 8px; font:11px "JetBrains Mono",monospace; color:#d6d6df; }
+#margus-cv .tag.cyan { border-color:rgba(104,229,239,.5); color:var(--cyan); }
+#margus-cv .tag.magenta { border-color:rgba(228,76,165,.5); color:var(--magenta); }
+
+#margus-cv section { padding-top:40px; }
+#margus-cv .section-title {
+  display:flex; align-items:center; gap:12px; margin:0 0 24px; color:var(--cyan);
+  font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+}
+#margus-cv .section-title::after { content:""; height:1px; flex:1; background:linear-gradient(90deg,var(--border),transparent); }
+
+#margus-cv .skills { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; border:1px solid var(--border); background:var(--border); }
+#margus-cv .skill { background:var(--bg); padding:16px; transition:.15s ease; }
+#margus-cv .skill:hover { background:var(--card); }
+#margus-cv .skill-name { margin-bottom:8px; color:var(--cyan); font:11px "JetBrains Mono",monospace; letter-spacing:.08em; text-transform:uppercase; }
+
+#margus-cv .experience-list { display:flex; flex-direction:column; gap:32px; }
+#margus-cv .job { display:grid; grid-template-columns:220px 1fr; gap:32px; }
+#margus-cv .date { color:var(--magenta); font:12px "JetBrains Mono",monospace; }
+#margus-cv .company { margin-top:4px; font-size:14px; font-weight:600; text-transform:uppercase; letter-spacing:.03em; }
+#margus-cv .location { margin-top:4px; color:var(--muted); font-size:12px; }
+#margus-cv .job-body { border-left:1px solid var(--border); padding-left:20px; }
+#margus-cv .job-title { color:var(--cyan); font-weight:600; margin-bottom:12px; }
+#margus-cv .job ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; }
+#margus-cv .job li { position:relative; padding-left:16px; color:#d0d0da; font-size:14px; line-height:1.6; }
+#margus-cv .job li::before { content:""; position:absolute; left:0; top:.7em; width:6px; height:4px; background:var(--purple); }
+#margus-cv .project-block { margin-top:20px; padding-top:16px; border-top:1px solid var(--border); }
+#margus-cv .project-meta { color:var(--magenta); font:11px "JetBrains Mono",monospace; text-transform:uppercase; letter-spacing:.18em; }
+#margus-cv .project-link { display:inline-flex; align-items:center; gap:6px; margin:8px 0 6px; color:var(--cyan); font-size:14px; font-weight:600; }
+#margus-cv .project-role { margin:0 0 12px; color:var(--muted); font-size:12px; }
+#margus-cv .project-link:hover { text-decoration:underline; }
+#margus-cv .project-link svg { width:16px; height:16px; }
+
+#margus-cv .work-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+#margus-cv .work-card { display:block; position:relative; padding:20px; border:1px solid var(--border); background:rgba(32,32,45,.76); transition:.18s ease; }
+#margus-cv .work-card:hover { border-color:rgba(104,229,239,.7); transform:translateY(-2px); }
+#margus-cv .work-card.featured { grid-column:1/-1; display:grid; grid-template-columns:1fr 1.3fr; gap:32px; }
+#margus-cv .work-card::before { content:""; position:absolute; right:0; top:0; width:64px; height:1px; background:var(--cyan); }
+#margus-cv .work-card.featured::before { background:var(--magenta); }
+#margus-cv .work-top { display:flex; justify-content:space-between; align-items:center; color:var(--muted); font:11px "JetBrains Mono",monospace; }
+#margus-cv .work-num { color:var(--cyan); }
+#margus-cv .featured .work-num { color:var(--magenta); }
+#margus-cv .arrow { opacity:0; transition:.15s ease; color:var(--cyan); }
+#margus-cv .work-card:hover .arrow { opacity:1; }
+#margus-cv .work-title { margin:12px 0 0; font-size:20px; line-height:1.15; font-weight:700; text-transform:uppercase; }
+#margus-cv .featured .work-title { font-size:30px; }
+#margus-cv .work-desc { margin:8px 0 0; color:var(--muted); font-size:14px; }
+
+#margus-cv .education { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+#margus-cv .edu-date { color:var(--muted); font:11px "JetBrains Mono",monospace; }
+#margus-cv .edu-title { font-size:14px; font-weight:500; }
+#margus-cv .edu-desc { color:var(--muted); font-size:14px; }
+#margus-cv .interests { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+#margus-cv .interest { border-left:1px solid var(--border); padding-left:16px; }
+#margus-cv .interest-title { font-size:14px; font-weight:500; }
+#margus-cv .interest-desc { color:var(--muted); font-size:14px; margin-top:2px; }
+#margus-cv footer { margin-top:24px; padding-top:20px; border-top:1px solid var(--border); color:var(--muted); font:11px "JetBrains Mono",monospace; }
+
+@media (max-width:900px) {
+  #margus-cv { padding:40px 20px; }
+  #margus-cv .hero { grid-template-columns:1fr; }
+  #margus-cv h1 { font-size:44px; }
+  #margus-cv .skills { grid-template-columns:repeat(2,1fr); }
+  #margus-cv .job { grid-template-columns:1fr; gap:12px; }
+  #margus-cv .job-body { padding-left:16px; }
+  #margus-cv .work-grid { grid-template-columns:1fr; }
+  #margus-cv .work-card.featured { grid-column:auto; grid-template-columns:1fr; gap:16px; }
+  #margus-cv .education,#margus-cv .interests { grid-template-columns:1fr; }
+}
+@media (max-width:560px) {
+  #margus-cv h1 { font-size:38px; }
+  #margus-cv .skills { grid-template-columns:1fr; }
+  #margus-cv .featured .work-title { font-size:24px; }
+}
+@media print {
+  #margus-cv { --bg:#fff; --fg:#222; --muted:#555; --card:#fff; --border:#ccc; --cyan:#2c6670; --magenta:#8d3568; --purple:#666; padding:0; color:#222; }
+  #margus-cv .cv-grid-bg,#margus-cv .no-print { display:none!important; }
+  #margus-cv .contact-card,#margus-cv .work-card { background:#fff; }
+  #margus-cv .intro,#margus-cv .job li { color:#333; }
+}
+</style>
+
+<div id="margus-cv">
+  <div class="cv-grid-bg"></div>
+  <div class="cv-wrap">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">CV / Unreal Engine</div>
+        <h1>Margus Mägi</h1>
+        <p class="role">Senior Unreal Engine Developer</p>
+        <p class="subrole">Gameplay / Multiplayer <span class="dot">·</span> Tech Lead</p>
+        <p class="founder">Founder - Dynamic Render Interactive OÜ</p>
+
+        <p class="intro">Unreal Engine developer with <strong>8+ years of UE4/UE5</strong> experience and <strong>4+ years as Tech Lead</strong>.</p>
+        <p class="intro">Professional experience across games, VR, multiplayer and real-time interactive projects. Hands-on background in gameplay programming, networking, optimization, tools, backend-connected systems and production Unreal Engine workflows. Technical leadership across architecture, planning, code reviews and technical decision-making.</p>
+
+        <div class="hero-actions no-print">
+          <a class="btn primary" href="https://www.dynamicrenderinteractive.com/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            Website
+          </a>
+          <a class="btn secondary" href="mailto:margus@dynamicrenderinteractive.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+            Contact
+          </a>
+        </div>
+      </div>
+
+      <aside class="contact-card">
+        <div class="contact-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Keila, Estonia</span>
+        </div>
+        <a class="contact-row" href="mailto:margus@dynamicrenderinteractive.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+          <span>margus@dynamicrenderinteractive.com</span>
+        </a>
+        <a class="contact-row" href="https://dynamicrenderinteractive.com/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          <span>dynamicrenderinteractive.com</span>
+        </a>
+        <a class="contact-row" href="https://linkedin.com/in/margusmagi-unreal" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          <span>linkedin.com/in/margusmagi-unreal</span>
+        </a>
+
+        <div class="availability">
+          <div class="mini-label">Availability</div>
+          <div class="tags">
+            <span class="tag">Remote</span><span class="tag">Full-time / part-time</span><span class="tag">Employment</span>
+            <span class="tag">Contract / freelance</span><span class="tag">B2B</span>
+          </div>
+        </div>
+        <div class="tags" style="margin-top:16px">
+          <span class="tag cyan">UE5</span><span class="tag cyan">C++</span><span class="tag cyan">Multiplayer</span><span class="tag cyan">AWS</span>
+        </div>
+      </aside>
+    </header>
+
+    <section>
+      <h2 class="section-title">Core Skills</h2>
+      <div class="skills">
+        <div class="skill"><div class="skill-name">Unreal</div><div class="tags"><span class="tag">UE4 / UE5</span><span class="tag">C++</span><span class="tag">Blueprint</span></div></div>
+        <div class="skill"><div class="skill-name">Gameplay</div><div class="tags"><span class="tag">Gameplay systems</span><span class="tag">Tools</span><span class="tag">Editor utilities</span></div></div>
+        <div class="skill"><div class="skill-name">Multiplayer</div><div class="tags"><span class="tag">Dedicated servers</span><span class="tag">Replication</span><span class="tag">Authority</span><span class="tag">RPC patterns</span></div></div>
+        <div class="skill"><div class="skill-name">Performance</div><div class="tags"><span class="tag">Profiling</span><span class="tag">Optimization</span><span class="tag">Refactoring</span></div></div>
+        <div class="skill"><div class="skill-name">Cloud / Backend</div><div class="tags"><span class="tag">AWS</span><span class="tag">GameLift</span><span class="tag">Cognito</span><span class="tag">API Gateway</span><span class="tag">DynamoDB</span><span class="tag">Lambda</span><span class="tag">EC2</span><span class="tag">Linux servers</span></div></div>
+        <div class="skill"><div class="skill-name">Streaming</div><div class="tags"><span class="tag">Unreal Engine Pixel Streaming</span><span class="tag">WebRTC</span></div></div>
+        <div class="skill"><div class="skill-name">Development infrastructure</div><div class="tags"><span class="tag">Perforce</span><span class="tag">UnrealGameSync (UGS)</span><span class="tag">Horde</span><span class="tag">Backups / automation</span></div></div>
+        <div class="skill"><div class="skill-name">Workflow</div><div class="tags"><span class="tag">Jira</span><span class="tag">Code reviews</span><span class="tag">Remote team collaboration</span></div></div>
+        <div class="skill"><div class="skill-name">Automation / scripting</div><div class="tags"><span class="tag">Python</span><span class="tag">Bash</span></div></div>
+        <div class="skill"><div class="skill-name">AI-assisted development</div><div class="tags"><span class="tag">Claude Code</span><span class="tag">ChatGPT</span><span class="tag">Coding</span><span class="tag">Debugging</span><span class="tag">Research</span></div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Experience</h2>
+      <div class="experience-list">
+        <article class="job">
+          <div>
+            <div class="date">Apr 2024 – Present</div>
+            <div class="company">Dynamic Render Interactive OÜ</div>
+            <div class="location">Keila, Estonia</div>
+          </div>
+          <div class="job-body">
+            <div class="job-title">Founder / Senior Unreal Engine Developer</div>
+            <ul>
+              <li>Founded Dynamic Render Interactive OÜ for Unreal Engine development, contract work and independent projects.</li>
+              <li>Built and maintain a small-studio Unreal development stack using Perforce, UnrealGameSync and Horde, including automated NAS backups and supporting scripts.</li>
+            </ul>
+
+            <div class="project-block">
+              <div class="project-meta">Selected Project · Apr 2024 – Dec 2025</div>
+              <a class="project-link" href="https://www.dynamicrenderinteractive.com/work/case-study-2" target="_blank" rel="noopener">
+                Cradle of Sins
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+              </a>
+              <div class="project-role">Tech Lead / Senior Unreal Engine Developer</div>
+              <ul>
+                <li>Led small-team task planning, code reviews and Perforce/Jira workflows.</li>
+                <li>Built and maintained dedicated-server multiplayer gameplay using replication, authority and RPC patterns.</li>
+                <li>Profiled and optimized game/render threads; delivered stability and performance improvements.</li>
+                <li>Refactored legacy systems toward data-oriented architecture and built editor tools to speed up designer iteration.</li>
+                <li>Migrated online/backend functionality from GameSparks to AWS: Cognito, API Gateway REST/WebSocket, DynamoDB, Lambda, GameLift and EC2.</li>
+                <li>Designed and implemented a browser-based interactive spectator system using Pixel Streaming/WebRTC, with cloud-hosted spectator clients connecting to active GameLift sessions and streaming live Unreal sessions to web viewers.</li>
+                <li>Implemented bidirectional browser-to-Unreal interaction, allowing authorized viewers to trigger meteor showers, player buffs and item spawns through the streamed game view.</li>
+                <li>Built AWS automation with Lambda, EC2 and Python/Bash for instance launch/configuration, session lifecycle and cleanup, GameLift connection, and reporting gameplay-event results and match statistics to web/backend services; collaborated with the web developer on browser-side integration.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="job">
+          <div>
+            <div class="date">Sep 2017 – Apr 2024</div>
+            <div class="company">U24 Solutions</div>
+            <div class="location">Tallinn, Estonia</div>
+          </div>
+          <div class="job-body">
+            <div class="job-title">Unreal Engine Developer → Tech Lead</div>
+            <ul>
+              <li>Unreal Engine development across released VR projects and interactive experiences; implemented gameplay features in Blueprint/C++.</li>
+              <li>Profiled and optimized performance; refactored and maintained production codebases.</li>
+              <li>Tech Lead: task planning, code reviews, technical direction and team workflows.</li>
+              <li>Released VR work: Slum Ball — single-player title, gameplay/optimization; additional short-form VR experiences — gameplay.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Selected Work</h2>
+      <div class="work-grid">
+        <a class="work-card featured" href="https://www.dynamicrenderinteractive.com/work/case-study-2" target="_blank" rel="noopener">
+          <div>
+            <div class="work-top"><span><span class="work-num">01</span> / Unreleased</span><span class="arrow">↗</span></div>
+            <h3 class="work-title">Cradle of Sins</h3>
+            <p class="work-desc">Tech Lead / Senior Unreal Engine Developer</p>
+          </div>
+          <div class="tags">
+            <span class="tag magenta">Cross-play multiplayer</span><span class="tag magenta">Dedicated servers</span>
+            <span class="tag magenta">Replication</span><span class="tag magenta">AWS / GameLift</span>
+            <span class="tag magenta">Pixel Streaming</span><span class="tag magenta">Performance optimization</span>
+            <span class="tag magenta">Editor / development tools</span><span class="tag magenta">VR</span><span class="tag magenta">PC</span>
+          </div>
+        </a>
+
+        <a class="work-card" href="https://store.steampowered.com/app/850500/Slum_Ball_VR_Tournament/" target="_blank" rel="noopener">
+          <div class="work-top"><span><span class="work-num">02</span> / Released VR single-player title</span><span class="arrow">↗</span></div>
+          <h3 class="work-title">Slum Ball</h3>
+          <p class="work-desc">Gameplay / Optimization</p>
+          <div class="tags" style="margin-top:16px"><span class="tag">VR</span><span class="tag">Gameplay</span><span class="tag">Blueprint / C++</span><span class="tag">Optimization</span></div>
+        </a>
+
+        <a class="work-card" href="https://www.dynamicrenderinteractive.com/work/case-study-1" target="_blank" rel="noopener">
+          <div class="work-top"><span><span class="work-num">03</span> / Promotional cinematic</span><span class="arrow">↗</span></div>
+          <h3 class="work-title">GSCAN</h3>
+          <p class="work-desc">Created investor-facing promotional renders and footage showcasing the product and its workflow.</p>
+          <div class="tags" style="margin-top:16px"><span class="tag">Scene setup</span><span class="tag">Lighting</span><span class="tag">Cameras</span><span class="tag">Sequencer</span><span class="tag">Rendered output</span></div>
+        </a>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Education</h2>
+      <div class="education">
+        <div><div class="edu-date">2015–2016</div><div class="edu-title">TalTech</div><div class="edu-desc">IT coursework</div></div>
+        <div><div class="edu-date">2011–2014</div><div class="edu-title">University of Tartu</div><div class="edu-desc">Physics coursework</div></div>
+        <div><div class="edu-date">2016</div><div class="edu-title">Web design &amp; dynamic web development</div><div class="edu-desc">Course</div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Interests</h2>
+      <div class="interests">
+        <div class="interest"><div class="interest-title">Disc golf</div><div class="interest-desc">Estonian Doubles Amateur Champion (2025)</div></div>
+        <div class="interest"><div class="interest-title">Music</div><div class="interest-desc">Piano, guitar, electronic music production</div></div>
+      </div>
+    </section>
+
+    <footer>© Margus Mägi</footer>
+  </div>
+</div>
